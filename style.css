@@ -1,0 +1,292 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Poppins, sans-serif;
+  background: #121212;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  justify-content: center;
+}
+
+.hidden{
+  display: none !important;
+}
+
+.player {
+  width: 350px;
+  background: #1e1e1e;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 0 10px #000;
+  text-align: center;
+  max-height: 100vh;
+  overflow: auto;
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #00ff99 #111; /* For Firefox */
+  transition: box-shadow 0.3s ease;
+}
+
+.player::-webkit-scrollbar {
+  width: 10px;
+}
+
+.player::-webkit-scrollbar-track {
+  background: #111; /* scrollbar background */
+  border-radius: 10px;
+}
+
+.player::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00ff99, #00cc7a);
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 255, 153, 0.7);
+  transition: all 0.3s ease;
+}
+
+/* Hover effect for the thumb */
+.player::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00ff99, #00ffcc);
+  box-shadow: 0 0 8px rgba(0, 255, 153, 1);
+}
+
+/* Optional: subtle glow at the edges */
+.player::-webkit-scrollbar-corner {
+  background: #111;
+}
+
+.album-art-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cd-frame {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #00ff99;
+  box-shadow: 0 0 20px rgba(0, 255, 153, 0.4);
+  animation: spin 6s linear infinite;
+  animation-play-state: paused; /* paused by default */
+}
+
+/* the album image itself */
+.cd-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* the center circle (CD hole) */
+.cd-hole {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at center, #00ff99 30%, #0a0a0a 80%);
+  border: 1px solid rgba(0, 255, 153, 0.7);
+  box-shadow: inset 0 0 8px rgba(0, 255, 153, 0.5);
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 10px #00ff99, 0 0 20px rgba(0,255,153,0.5); }
+  50% { box-shadow: 0 0 15px #00ff99, 0 0 30px rgba(0,255,153,0.8); }
+}
+
+.playing .cd-hole {
+  animation: pulse 2s infinite ease-in-out;
+}
+
+/* rotation animation */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* glowing + rotation when playing */
+.playing .cd-frame {
+  animation-play-state: running;
+  box-shadow: 0 0 25px #00ff99, 0 0 50px rgba(0,255,153,0.3);
+}
+
+.song-info {
+  margin-bottom: 10px;
+}
+
+.progress {
+  width: 100%;
+  height: 5px;
+  background: #333;
+  border-radius: 5px;
+  margin: 10px 0 0 0;
+  position: relative;
+}
+
+.progress-filled {
+  height: 100%;
+  background: #00ff99;
+  width: 0%;
+  border-radius: 5px;
+}
+
+.audio-info{
+  position: relative;
+}
+
+.music-duration{
+    position: absolute;
+    right: 0;
+    top: 5px
+}
+
+.volume-container {
+  position: absolute;
+  left: 0;
+  top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.volume-container input[type="range"] {
+  width: 100px;
+  cursor: pointer;
+  accent-color: #00ff99; /* matches your theme */
+}
+
+.volume-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.volume-btn:hover {
+  transform: scale(1.1);
+  color: #00ff99;
+}
+
+#volume-value {
+  font-size: 14px;
+  color: #ccc;
+  width: 40px;
+  text-align: right;
+}
+
+.controls{
+  margin-top: 50px;
+}
+
+.controls button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: transform 0.2s, color 0.3s;
+}
+
+.controls button:hover {
+  transform: scale(1.1);
+  color: #00ff99;
+}
+
+#shuffle.active {
+  color: #00ff99;
+}
+
+#repeat.active {
+  color: #00ff99;
+}
+
+
+.load-instruction {
+  font-size: 13px;
+  color: #aaa; /* Lighter gray for instructional text */
+  margin-top: 30px;
+  margin-bottom: 10px; /* Space above the button */
+  padding: 0 10px;
+  line-height: 1.4;
+}
+
+.load-btn {
+  background: #00ff99;
+  border: none;
+  color: #000;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.load-btn:hover {
+  background: #00cc77;
+}
+
+.playlist {
+  margin-top: 15px;
+  text-align: left;
+  font-size: 14px;
+  padding: 0 5px;
+  width: calc(100% - 10px);
+}
+/* Style for all songs in the playlist */
+.song-item {
+  padding: 8px 10px; 
+  width: 95%;
+  margin: 5px auto; /* Space between songs */
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  overflow: hidden; /* Hide overflow text */
+  white-space: nowrap; /* Prevent title wrapping */
+  text-overflow: ellipsis; /* Add "..." to long titles */
+  background-color: #2a2a2a; /* Slightly lighter background than the player */
+}
+
+/* Hover state for interactivity */
+.song-item:hover {
+  background-color: #383838; /* Darken slightly on hover */
+  color: #00ff99; /* Use the accent color on hover for feedback */
+}
+
+/* Style for the currently playing song */
+.song-item.current {
+  background-color: #00ff99; /* Use the main accent color */
+  color: #1e1e1e; /* Dark text for contrast against the bright background */
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0, 255, 153, 0.2); /* Subtle glow effect */
+}
+
+@media screen and (max-width: 600px) {
+  .player {
+    height: 100vh;
+    width: auto;
+    border-radius: 0px;
+  }
+
+  .song-item{
+    width: 90vw;
+  }
+}

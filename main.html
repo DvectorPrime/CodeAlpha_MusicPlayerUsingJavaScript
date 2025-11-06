@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://unpkg.com/jsmediatags@latest/dist/jsmediatags.min.js"></script>
+    <title>Music Play</title>
+</head>
+<body>
+    <div class="player">
+        <div class="album-art-container">
+            <div class="cd-frame">
+                <img id="album-art" src="square-image.jpg" alt="Album Art">
+                <div class="cd-hole"></div>
+            </div>
+        </div>
+        <div class="song-info">
+            <h3 id="song-title">No song playing</h3>
+            <p id="song-artist">---</p>
+        </div>
+        <div class="progress" id="progress">
+            <div class="progress-filled" id="progress-bar"></div>
+        </div>
+        <div class="audio-info">
+            <div class="music-duration">
+                <span id="current-time">0:00</span>/<span id="total-time">0:00</span>
+            </div>
+            <div class="volume-container">
+                <button id="mute" class="volume-btn"><i class="fa-solid fa-volume-high"></i></button>
+                <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
+                <span id="volume-value">100%</span>
+            </div>
+        </div>
+        <div class="controls">
+            <button id="prev"><i class="fa-solid fa-backward-step"></i></button>
+            <button id="play"><i id="playIcon" class="fa-solid fa-play"></i><i id="pauseIcon" class="fa-solid fa-pause hidden"></i></button>
+            <button id="next"><i class="fa-solid fa-forward-step"></i></button>
+            <button id="shuffle"><i class="fa-solid fa-shuffle"></i></button>
+            <button id="repeat"><i class="fa-solid fa-repeat"></i></button>
+        </div>
+
+        <div class="load-area">
+            <p class="load-instruction">
+                Click the button to select the folder containing your music files.
+            </p>
+            <button class="load-btn" id="loadBtn">📁 Load Songs</button>
+        </div>
+
+
+        <div class="playlist" id="playlist"></div>
+
+        <audio id="audio"></audio>
+        <script src="script.js"></script>
+  </div>
+</body>
+</html>
